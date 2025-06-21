@@ -64,7 +64,8 @@ The application implements:
 - Factory pattern for user creation
 - Observer pattern for notifications
 
-Git
+## GitHub Repository
+https://github.com/VCSTDN2024/prog7311-part3-poe-SiceloNtuli.git
 
 ## Notes
 - This is a prototype application developed for educational purposes.
