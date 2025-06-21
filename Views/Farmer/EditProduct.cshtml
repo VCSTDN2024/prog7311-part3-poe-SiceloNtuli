@@ -1,0 +1,164 @@
+@model Prog7311_Part2.Models.Product
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<style>
+    /* Updated Body Styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #f2c2f2, #a8d0ff); /* Soft gradient background */
+        background-attachment: fixed;
+        background-size: cover;
+        color: #333;
+    }
+
+    .container {
+        margin-top: 20px;
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.9); /* Transparent white background */
+        border-radius: 1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #fbc02d; /* Yellow */
+        color: white;
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 0.5rem;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 1px solid #e0e0e0;
+    }
+
+    .form-group label {
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    .btn {
+        border-radius: 0.5rem;
+        padding: 0.8rem;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .btn-warning {
+        background-color: #ff7043; /* Orange */
+        border-color: #ff7043;
+    }
+
+        .btn-warning:hover {
+            background-color: #ff5722; /* Lighter Orange */
+            border-color: #ff5722;
+        }
+
+    .btn-secondary {
+        background-color: #0d47a1; /* Navy Blue */
+        border-color: #0d47a1;
+    }
+
+        .btn-secondary:hover {
+            background-color: #1976d2; /* Lighter Navy Blue */
+            border-color: #1976d2;
+        }
+
+    .alert-danger {
+        background-color: #f8d7da; /* Light Pink */
+        color: #721c24;
+        border-color: #f5c6cb;
+    }
+
+        .alert-danger ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .alert-danger li {
+            list-style-type: none;
+        }
+
+    .input-group-text {
+        background-color: #f8f9fa;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Edit Product</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="EditProduct" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="FarmerId" />
+                        <input type="hidden" asp-for="CreatedAt" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="control-label">Product Name</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Category" class="control-label">Category</label>
+                            <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<Prog7311_Part2.Models.ProductCategory>()"></select>
+                            <span asp-validation-for="Category" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Description" class="control-label">Description</label>
+                            <textarea asp-for="Description" class="form-control"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Price" class="control-label">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">R</span>
+                                <input asp-for="Price" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ProductionDate" class="control-label">Production Date</label>
+                            <input asp-for="ProductionDate" class="form-control" type="date" />
+                            <span asp-validation-for="ProductionDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ImageUrl" class="control-label">Image URL</label>
+                            <input asp-for="ImageUrl" class="form-control" />
+                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group d-flex justify-content-between">
+                            <a asp-action="ViewProducts" class="btn btn-secondary">Back to Products</a>
+                            <button type="submit" class="btn btn-warning">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

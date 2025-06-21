@@ -1,0 +1,188 @@
+@model IEnumerable<Prog7311_Part2.Models.Farmer>
+
+@{
+    ViewData["Title"] = "Employee Dashboard";
+}
+
+<style>
+    body {
+        font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+        color: #ffffff; /* White text for contrast */
+        background: linear-gradient(to right, #D75B8A, #9B59B6); /* Pink to purple gradient background */
+    }
+
+    h2, h3 {
+        color: #FFEB3B; /* Yellow-gold for headings to complement pink and purple */
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background-color: #8E44AD; /* Purple card background */
+    }
+
+    .card-header {
+        background-color: #6A1B9A; /* Darker purple for card header */
+        border-bottom: 1px solid #8E44AD;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #FF4081; /* Pink button */
+        border-color: #FF4081;
+        color: white;
+    }
+
+        .btn-success:hover {
+            background-color: #F50057;
+            border-color: #F50057;
+        }
+
+    .btn-info {
+        background-color: #9B59B6; /* Purple button */
+        border-color: #9B59B6;
+        color: white;
+    }
+
+        .btn-info:hover {
+            background-color: #8E44AD;
+            border-color: #8E44AD;
+        }
+
+    .btn-light {
+        color: #FFEB3B; /* Gold text on light buttons */
+        border-color: #ddd;
+        background-color: #9B59B6;
+    }
+
+        .btn-light:hover {
+            color: #F39C12;
+            border-color: #ccc;
+            background-color: #8E44AD;
+        }
+
+    .table th, .table td {
+        vertical-align: middle;
+        color: #ECF0F1; /* Light text for table content */
+    }
+
+    .alert-info {
+        background-color: #8E44AD; /* Purple alert */
+        border-color: #9B59B6;
+        color: white;
+    }
+
+    .alert-warning {
+        background-color: #FFB74D; /* Light yellow for warnings */
+        border-color: #FF9800;
+        color: white;
+    }
+
+    .table-striped tbody tr:nth-child(odd) {
+        background-color: #9B59B6; /* Lighter purple for odd rows */
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #8E44AD; /* Hover effect with dark purple */
+    }
+
+    .card-body p {
+        color: #BDC3C7; /* Lighter text for paragraphs */
+    }
+
+    /* Adjusted text color for Registered Farmers section */
+    .table td {
+        color: #2C3E50; /* Darker text for better readability */
+    }
+
+    /* Optional: Adjust header for better contrast */
+    .table th {
+        color: #F39C12; /* Gold header text */
+    }
+
+</style>
+
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card p-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2>Farmer Management</h2>
+                    <a asp-action="AddFarmer" class="btn btn-success">Add New Farmer</a>
+                </div>
+                <div class="card-body">
+                    <p>Welcome to the employee dashboard. Here you can manage farmers and their products.</p>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> There are currently <strong>@Model.Count()</strong> registered farmers in the system.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3>Registered Farmers</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Farm Name</th>
+                                        <th>Location</th>
+                                        <th>Contact</th>
+                                        <th>Registered Date</th>
+                                        <th>Products</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var farmer in Model)
+                                    {
+                                        <tr>
+                                            <td>@farmer.Name</td>
+                                            <td>@farmer.Location</td>
+                                            <td>@(string.IsNullOrEmpty(farmer.PhoneNumber) ? "N/A" : farmer.PhoneNumber)</td>
+                                            <td>@farmer.CreatedAt.ToShortDateString()</td>
+                                            <td>@farmer.Products.Count</td>
+                                            <td>
+                                                <a asp-action="ViewFarmerProducts" asp-route-id="@farmer.Id" class="btn btn-sm btn-info">View Products</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <p>No farmers registered yet. <a asp-action="AddFarmer">Add your first farmer</a>.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h3>Product Filters</h3>
+                </div>
+                <div class="card-body">
+                    <p>Filter and search products across all farmers based on various criteria.</p>
+                    <a asp-action="FilterProducts" class="btn btn-info">Advanced Product Filtering</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

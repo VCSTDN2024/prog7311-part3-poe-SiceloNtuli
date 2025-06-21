@@ -1,0 +1,115 @@
+@{
+    ViewData["Title"] = "Filter Products";
+}
+
+<style>
+    body {
+        font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+        color: #ffffff; /* White text for contrast */
+        background: linear-gradient(to right, #D75B8A, #9B59B6); /* Pink to purple gradient background */
+    }
+
+    h2 {
+        color: #FFEB3B; /* Yellow-gold for headings */
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background-color: #8E44AD; /* Purple background */
+    }
+
+    label {
+        font-weight: 500;
+        color: #ffffff; /* White label text */
+    }
+
+    .form-control, .form-select {
+        border-radius: 0.5rem;
+        background-color: #9B59B6; /* Purple background for inputs */
+        color: white; /* White text in input fields */
+    }
+
+        .form-control::placeholder {
+            color: #BDC3C7; /* Light gray placeholder text */
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #FF4081; /* Pink border on focus */
+            box-shadow: 0 0 0 0.2rem rgba(255, 64, 129, 0.25);
+        }
+
+    .btn-primary-custom {
+        background-color: #FF4081; /* Pink button */
+        border-color: #FF4081;
+        color: white;
+    }
+
+        .btn-primary-custom:hover {
+            background-color: #F50057;
+            border-color: #F50057;
+        }
+
+    .form-group d-flex {
+        margin-top: 2rem;
+    }
+
+    .btn-outline-secondary {
+        border-color: #9B59B6; /* Purple border */
+        color: #9B59B6; /* Purple text */
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #9B59B6; /* Purple background on hover */
+            color: white; /* White text on hover */
+        }
+</style>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col">
+            <div class="card p-4">
+                <h2 class="mb-4">Advanced Product Filtering</h2>
+
+                <form asp-action="FilterProducts" method="post">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="farmerId" class="form-label">Farmer</label>
+                            <select id="farmerId" name="farmerId" class="form-select">
+                                <option value="">-- All Farmers --</option>
+                                @foreach (var farmer in ViewBag.Farmers)
+                                {
+                                    <option value="@farmer.Id">@farmer.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select id="category" name="category" class="form-select">
+                                <option value="">-- All Categories --</option>
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    <option value="@category">@category</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="startDate" class="form-label">Start Date</label>
+                            <input type="date" id="startDate" name="startDate" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="endDate" class="form-label">End Date</label>
+                            <input type="date" id="endDate" name="endDate" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between mt-4">
+                        <a asp-action="Index" class="btn btn-outline-secondary px-4">Back to Dashboard</a>
+                        <button type="submit" class="btn btn-primary-custom px-4">Apply Filters</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

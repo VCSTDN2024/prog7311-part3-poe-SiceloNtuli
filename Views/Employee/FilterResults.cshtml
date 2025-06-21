@@ -1,0 +1,158 @@
+@model IEnumerable<Prog7311_Part2.Models.Product>
+
+@{
+    ViewData["Title"] = "Filter Results";
+}
+
+<style>
+    body {
+        font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+        color: #ffffff; /* White text for contrast */
+        background: linear-gradient(to right, #D75B8A, #9B59B6); /* Pink to purple gradient */
+    }
+
+    h2, h5 {
+        color: #FFEB3B; /* Yellow-gold for headings */
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background-color: #8E44AD; /* Purple background */
+    }
+
+    .card-header {
+        background-color: #8E44AD; /* Purple header */
+        border-bottom: 1px solid #ddd;
+    }
+
+    .btn-light {
+        color: #1E3A8A;
+        border-color: #ddd;
+        background-color: #ffffff;
+    }
+
+        .btn-light:hover {
+            color: #0f72d5;
+            border-color: #ccc;
+            background-color: #f1f1f1;
+        }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .btn-primary-custom {
+        background-color: #FF4081; /* Pink button */
+        border-color: #FF4081;
+        color: white;
+    }
+
+        .btn-primary-custom:hover {
+            background-color: #F50057;
+            border-color: #F50057;
+        }
+
+    .btn-secondary {
+        background-color: #9B59B6; /* Purple button for secondary action */
+        border-color: #9B59B6;
+        color: white;
+    }
+
+        .btn-secondary:hover {
+            background-color: #8E44AD; /* Darker purple on hover */
+            border-color: #8E44AD;
+        }
+</style>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col">
+            <div class="card p-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2>Filtered Products</h2>
+                    <a asp-action="FilterProducts" class="btn btn-light">Modify Filters</a>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h5>Applied Filters:</h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                @{
+                                    string farmerName = "All Farmers";
+                                    if (ViewBag.SelectedFarmerId != null && ViewBag.Farmers != null)
+                                    {
+                                        foreach (var farmer in ViewBag.Farmers)
+                                        {
+                                            if (farmer.Id == ViewBag.SelectedFarmerId)
+                                            {
+                                                farmerName = farmer.Name;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                <strong>Farmer:</strong> @farmerName
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Category:</strong> @(ViewBag.SelectedCategory != null ? ViewBag.SelectedCategory.ToString() : "All Categories")
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Start Date:</strong> @(ViewBag.SelectedStartDate != null ? ((DateTime)ViewBag.SelectedStartDate).ToString("yyyy-MM-dd") : "Any")
+                            </div>
+                            <div class="col-md-3">
+                                <strong>End Date:</strong> @(ViewBag.SelectedEndDate != null ? ((DateTime)ViewBag.SelectedEndDate).ToString("yyyy-MM-dd") : "Any")
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Farmer</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Production Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in Model)
+                                    {
+                                        <tr>
+                                            <td>@product.Name</td>
+                                            <td>@product.Farmer.Name</td>
+                                            <td>@product.Category</td>
+                                            <td>R @product.Price.ToString("F2")</td>
+                                            <td>@product.ProductionDate.ToString("yyyy-MM-dd")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <p>No products match the selected filters.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>

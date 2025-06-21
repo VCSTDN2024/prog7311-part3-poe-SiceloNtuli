@@ -1,0 +1,255 @@
+﻿@{
+    ViewData["Title"] = "Agri-Energy Connect";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agri-Energy Connect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600&family=Raleway:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6a3093;
+            --secondary: #a044ff;
+            --accent: #f857a6;
+            --light: #f1edfd;
+            --dark: #2f195f;
+            --card-shadow: 0 10px 20px rgba(106, 48, 147, 0.15);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f3 100%);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 3rem 0;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(106, 48, 147, 0.2);
+        }
+
+        .header-content {
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #e0c3ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lead {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .col-md-6 {
+            flex: 1 1 calc(50% - 1rem);
+            min-width: 300px;
+        }
+
+        .col-md-4 {
+            flex: 1 1 calc(33.333% - 1.33rem);
+            min-width: 250px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(106, 48, 147, 0.25);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            color: var(--dark);
+        }
+
+        .card-title:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+
+        .card-text {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 7px 20px rgba(106, 48, 147, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 7px 20px rgba(17, 153, 142, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .feature-card .card-body {
+            border-top: 5px solid var(--accent);
+        }
+
+        @@media (max-width: 768px) {
+            .col-md-6, .col-md-4 {
+                flex: 1 1 100%;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .lead {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container header-content">
+            <h1>Welcome to Agri-Energy Connect</h1>
+            <p class="lead">Bridging the gap between agriculture and green energy solutions</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">For Farmers</h5>
+                        <p class="card-text">
+                            Join our platform to showcase your sustainable farming products and connect with green energy providers. Share your success stories and learn from others.
+                        </p>
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Register as a Farmer</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">For Employees</h5>
+                        <p class="card-text">
+                            Manage farmer profiles, view all products, and help connect farmers with the resources they need. Filter products based on category and production date.
+                        </p>
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-success">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card feature-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Sustainable Farming Hub</h5>
+                        <p class="card-text">
+                            Access resources on best practices in sustainable farming, including organic farming techniques, water conservation methods, and soil health maintenance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card feature-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Green Energy Marketplace</h5>
+                        <p class="card-text">
+                            Explore green energy solutions tailored to agricultural needs, such as solar-powered irrigation systems, wind turbines for farms, and biogas energy solutions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card feature-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Educational Resources</h5>
+                        <p class="card-text">
+                            Access online courses, webinars, and workshops on integrating green energy technologies in agriculture and the benefits of adopting renewable energy sources on farms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

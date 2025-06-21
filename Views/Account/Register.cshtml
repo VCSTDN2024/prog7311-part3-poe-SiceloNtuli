@@ -1,0 +1,203 @@
+@model Prog7311_Part2.Models.ViewModels.RegisterFarmerViewModel
+
+@{
+    ViewData["Title"] = "Register Farmer";
+}
+
+<style>
+    :root {
+        --reg-primary: #28a745;
+        --reg-accent: #8bd4a1;
+        --reg-bg: #f4fdf7;
+        --reg-dark: #1e392b;
+        --reg-shadow: 0 6px 20px rgba(40, 167, 69, 0.2);
+    }
+
+    body {
+        background: linear-gradient(135deg, var(--reg-primary), var(--reg-accent));
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 2rem;
+        color: var(--reg-dark);
+    }
+
+    .register-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: var(--reg-shadow);
+        padding: 2rem;
+        margin-top: 2rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .register-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+        }
+
+    .register-header {
+        background: linear-gradient(135deg, var(--reg-accent), var(--reg-primary));
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px 15px 0 0;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .form-group label {
+        font-weight: 600;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--reg-primary);
+        margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--reg-primary), var(--reg-accent));
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 0.6rem 1.5rem;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background: var(--reg-dark);
+            transform: translateY(-2px);
+        }
+
+    .btn-outline-secondary {
+        border-radius: 30px;
+        font-weight: 600;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+    hr {
+        border-top: 2px dashed var(--reg-accent);
+    }
+
+    @@media (max-width: 768px) {
+        .register-card
+
+    {
+        padding: 1.5rem;
+    }
+
+    .register-header {
+        font-size: 1.4rem;
+    }
+
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="register-card">
+            <div class="register-header">Register as Farmer</div>
+            <div class="card-body">
+                <form asp-action="Register" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="section-title">Account Information</div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Username" class="control-label"></label>
+                                <input asp-for="Username" class="form-control" />
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Password" class="control-label"></label>
+                                <input asp-for="Password" class="form-control" type="password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="ConfirmPassword" class="control-label"></label>
+                                <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="section-title">Farmer Profile</div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="FarmerName" class="control-label">Farm Name</label>
+                                <input asp-for="FarmerName" class="form-control" />
+                                <span asp-validation-for="FarmerName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Location" class="control-label"></label>
+                                <input asp-for="Location" class="form-control" />
+                                <span asp-validation-for="Location" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
+                                <input asp-for="PhoneNumber" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label">Farm Description</label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        <a asp-action="Login" class="btn btn-outline-secondary">Already have an account?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

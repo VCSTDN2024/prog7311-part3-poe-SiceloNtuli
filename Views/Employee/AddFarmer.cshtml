@@ -1,0 +1,165 @@
+@model Prog7311_Part2.Models.ViewModels.RegisterFarmerViewModel
+
+@{
+    ViewData["Title"] = "Add Farmer";
+}
+
+<style>
+    body {
+        font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+        color: #ffffff; /* White text for contrast */
+        background: linear-gradient(to right, #D75B8A, #9B59B6); /* Pink to purple gradient background */
+    }
+
+    h2, h4 {
+        color: #FFEB3B; /* Yellow-gold for headings */
+    }
+
+    .btn-primary-custom {
+        background-color: #FF4081; /* Pink button */
+        border-color: #FF4081;
+        color: white;
+    }
+
+        .btn-primary-custom:hover {
+            background-color: #F50057;
+            border-color: #F50057;
+        }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background-color: #8E44AD; /* Purple card background */
+    }
+
+    label {
+        font-weight: 500;
+        color: #ffffff; /* White label text for contrast */
+    }
+
+    .form-control {
+        border-radius: 0.5rem;
+        background-color: #9B59B6; /* Purple background for inputs */
+        color: white; /* White text in input fields */
+    }
+
+        .form-control::placeholder {
+            color: #BDC3C7; /* Light gray placeholder text */
+        }
+
+        .form-control:focus {
+            border-color: #FF4081; /* Pink border on focus */
+            box-shadow: 0 0 0 0.2rem rgba(255, 64, 129, 0.25);
+        }
+
+    .table th, .table td {
+        vertical-align: middle;
+        color: #ECF0F1; /* Light text for table content */
+    }
+
+    .table-striped tbody tr:nth-child(odd) {
+        background-color: #9B59B6; /* Lighter purple for odd rows */
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #8E44AD; /* Hover effect with dark purple */
+    }
+
+    .alert-info {
+        background-color: #8E44AD; /* Purple alert */
+        border-color: #9B59B6;
+        color: white;
+    }
+
+    .alert-warning {
+        background-color: #FFB74D; /* Light yellow for warnings */
+        border-color: #FF9800;
+        color: white;
+    }
+
+    .card-body p {
+        color: #BDC3C7; /* Lighter text for paragraphs */
+    }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-4">
+                <h2 class="text-center mb-4">Add New Farmer</h2>
+
+                <form asp-action="AddFarmer" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <h4 class="mb-3">Account Information</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="Username" class="form-label"></label>
+                            <input asp-for="Username" class="form-control" />
+                            <span asp-validation-for="Username" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="ConfirmPassword" class="form-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <h4 class="mb-3">Farmer Profile</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="FarmerName" class="form-label">Farm Name</label>
+                            <input asp-for="FarmerName" class="form-control" />
+                            <span asp-validation-for="FarmerName" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Location" class="form-label"></label>
+                            <input asp-for="Location" class="form-control" />
+                            <span asp-validation-for="Location" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Description" class="form-label">Farm Description</label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Description" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-outline-secondary px-4">Back to Dashboard</a>
+                        <button type="submit" class="btn btn-primary-custom px-4">Add Farmer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

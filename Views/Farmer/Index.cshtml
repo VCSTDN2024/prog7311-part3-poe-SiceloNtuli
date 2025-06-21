@@ -1,0 +1,190 @@
+@model Prog7311_Part2.Models.Farmer
+
+@{
+    ViewData["Title"] = "Farmer Dashboard";
+}
+
+<style>
+    /* Updated Body Styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        background: linear-gradient(135deg, #f2c2f2, #a8d0ff); /* Gradient from light pink to soft blue */
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+    h2, h3, h5 {
+        font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+    }
+
+    .card-header {
+        border-bottom: 2px solid #e3e4e8;
+        color: white;
+        font-weight: bold;
+    }
+
+    .btn {
+        border-radius: 0.5rem;
+        padding: 0.8rem;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #6a1b9a; /* Purple */
+        border-color: #6a1b9a;
+    }
+
+        .btn-primary:hover {
+            background-color: #9c4dcc; /* Lighter Purple */
+            border-color: #9c4dcc;
+        }
+
+    .btn-outline-primary {
+        border-color: #9c4dcc;
+        color: #9c4dcc;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #9c4dcc;
+            color: white;
+        }
+
+    .btn-info {
+        background-color: #0d47a1; /* Navy Blue */
+        border-color: #0d47a1;
+    }
+
+        .btn-info:hover {
+            background-color: #1976d2; /* Lighter Navy */
+            border-color: #1976d2;
+        }
+
+    .btn-success {
+        background-color: #43a047; /* Green */
+        border-color: #43a047;
+    }
+
+        .btn-success:hover {
+            background-color: #66bb6a; /* Lighter Green */
+            border-color: #66bb6a;
+        }
+
+    .btn-warning {
+        background-color: #ff7043; /* Orange */
+        border-color: #ff7043;
+    }
+
+        .btn-warning:hover {
+            background-color: #ff5722; /* Lighter Orange */
+            border-color: #ff5722;
+        }
+
+    .btn-danger {
+        background-color: #f44336; /* Pink */
+        border-color: #f44336;
+    }
+
+        .btn-danger:hover {
+            background-color: #e57373; /* Lighter Pink */
+            border-color: #e57373;
+        }
+
+    .card-header.bg-primary {
+        background-color: #6a1b9a; /* Purple */
+    }
+
+    .card-header.bg-info {
+        background-color: #0d47a1; /* Navy Blue */
+    }
+
+    .card-header.bg-success {
+        background-color: #43a047; /* Green */
+    }
+
+    .card-header.bg-warning {
+        background-color: #ff7043; /* Orange */
+    }
+
+    .list-group-item {
+        font-size: 1.1rem;
+    }
+
+    .container {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for the container */
+        border-radius: 1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+</style>
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h2>Welcome, @Model.Name</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Farm Information</h5>
+                            <p><strong>Location:</strong> @Model.Location</p>
+                            <p><strong>Since:</strong> @Model.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                            <p><strong>Contact:</strong> @(string.IsNullOrEmpty(Model.PhoneNumber) ? "Not provided" : Model.PhoneNumber)</p>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Description</h5>
+                            <p>@(string.IsNullOrEmpty(Model.Description) ? "No description provided." : Model.Description)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h3>Product Management</h3>
+                </div>
+                <div class="card-body">
+                    <p>Add and manage your agricultural and green energy products.</p>
+                    <p>You currently have <strong>@Model.Products.Count</strong> products listed.</p>
+                    <div class="d-flex flex-column">
+                        <a asp-action="AddProduct" class="btn btn-primary mb-2">Add New Product</a>
+                        <a asp-action="ViewProducts" class="btn btn-outline-primary">View My Products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                    <h3>Resources</h3>
+                </div>
+                <div class="card-body">
+                    <p>Access helpful resources for sustainable farming and green energy integration.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Sustainable Farming Techniques</li>
+                        <li class="list-group-item">Green Energy Solutions for Farms</li>
+                        <li class="list-group-item">Water Conservation Methods</li>
+                        <li class="list-group-item">Soil Health Maintenance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,136 @@
+@model Prog7311_Part2.Models.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    :root {
+        --login-primary: #4e54c8;
+        --login-accent: #8f94fb;
+        --login-bg: #f8f9fc;
+        --login-dark: #2e2e4d;
+        --login-shadow: 0 6px 20px rgba(78, 84, 200, 0.2);
+    }
+
+    body {
+        background: linear-gradient(135deg, var(--login-primary), var(--login-accent));
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 2rem;
+        color: var(--login-dark);
+    }
+
+    .login-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: var(--login-shadow);
+        padding: 2rem;
+        margin-top: 2rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(78, 84, 200, 0.3);
+        }
+
+    .login-header {
+        background: linear-gradient(135deg, var(--login-accent), var(--login-primary));
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px 15px 0 0;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .form-group label {
+        font-weight: 600;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--login-primary), var(--login-accent));
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 0.6rem 1.5rem;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background: var(--login-dark);
+            transform: translateY(-2px);
+        }
+
+    .btn-outline-secondary {
+        border-radius: 30px;
+        font-weight: 600;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+    @@media (max-width: 768px) {
+        .login-card
+
+    {
+        padding: 1.5rem;
+    }
+
+    .login-header {
+        font-size: 1.4rem;
+    }
+
+    }</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="login-card">
+            <div class="login-header">Login</div>
+            <div class="card-body">
+                <form asp-action="Login" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check mb-3">
+                        <input asp-for="RememberMe" class="form-check-input" />
+                        <label asp-for="RememberMe" class="form-check-label"></label>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <a asp-action="Register" class="btn btn-outline-secondary">Register as Farmer</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
